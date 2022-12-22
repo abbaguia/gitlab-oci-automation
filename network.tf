@@ -2,7 +2,7 @@
 
 # Core VCN
 resource oci_core_vcn this { 
-  compartment_id = oci_identity_compartment.this.id
+  compartment_id = var.compartment_ocid #oci_identity_compartment.this.id
   cidr_block = var.vcn_cidr_block
   display_name = "${var.display_name_prefix} Core VCN"
   dns_label    = "${var.host_name_prefix}core"
@@ -10,7 +10,7 @@ resource oci_core_vcn this {
 
 # Internet Gateway
 resource oci_core_internet_gateway this {  
-  compartment_id = oci_identity_compartment.this.id
+  compartment_id = var.compartment_ocid #oci_identity_compartment.this.id
   display_name = "${var.display_name_prefix} IGW"
   enabled      = "true"
   vcn_id = "${oci_core_vcn.this.id}"
@@ -18,7 +18,7 @@ resource oci_core_internet_gateway this {
 
 # Default Routing Table
 resource oci_core_default_route_table this { 
-  compartment_id = oci_identity_compartment.this.id
+  compartment_id = var.compartment_ocid #oci_identity_compartment.this.id
   display_name = "${var.display_name_prefix} Routing Table"
   manage_default_resource_id = oci_core_vcn.this.default_route_table_id
   route_rules {
@@ -31,7 +31,7 @@ resource oci_core_default_route_table this {
 
 # Network Security Group
 resource oci_core_network_security_group this {
-  compartment_id = oci_identity_compartment.this.id
+  compartment_id = var.compartment_ocid #oci_identity_compartment.this.id
   display_name = "${var.display_name_prefix} Network Security Group"
   vcn_id = oci_core_vcn.this.id
 }
@@ -60,7 +60,7 @@ resource oci_core_network_security_group_security_rule this {
 
 # Default DHCP Options 
 resource oci_core_default_dhcp_options Default-DHCP-Options {
-  compartment_id = oci_identity_compartment.this.id
+  compartment_id = var.compartment_ocid #oci_identity_compartment.this.id
   display_name     = "Default DHCP Options for ${var.display_name_prefix}"
   domain_name_type = "CUSTOM_DOMAIN"
   manage_default_resource_id = oci_core_vcn.this.default_dhcp_options_id
@@ -79,7 +79,7 @@ resource oci_core_default_dhcp_options Default-DHCP-Options {
 
 # Private Subnet Route Table
 resource oci_core_route_table Route-Table-for-My-Private-Subnet {
-  compartment_id = oci_identity_compartment.this.id
+  compartment_id = var.compartment_ocid #oci_identity_compartment.this.id
   display_name = "Route Table for Private Subnet for ${var.display_name_prefix}"
   vcn_id = oci_core_vcn.this.id
 }
@@ -88,7 +88,7 @@ resource oci_core_route_table Route-Table-for-My-Private-Subnet {
 resource oci_core_subnet My-Private-Subnet {
   #availability_domain = <<Optional value not found in discovery>>
   cidr_block     = var.subnet_cidr_block
-  compartment_id = oci_identity_compartment.this.id
+  compartment_id = var.compartment_ocid #oci_identity_compartment.this.id
   dhcp_options_id = oci_core_vcn.this.default_dhcp_options_id
   display_name    = "Private Subnet for ${var.display_name_prefix}"
   dns_label       = "${var.host_name_prefix}prvnet"
@@ -105,7 +105,7 @@ resource oci_core_subnet My-Private-Subnet {
 
 # Private Subnet Security List
 resource oci_core_security_list Security-List-for-My-Private-Subnet {
-  compartment_id = oci_identity_compartment.this.id
+  compartment_id = var.compartment_ocid #oci_identity_compartment.this.id
   display_name = "Security List for Private Subnet ${var.display_name_prefix}"
   egress_security_rules {
     #description = <<Optional value not found in discovery>>
