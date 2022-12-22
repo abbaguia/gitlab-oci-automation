@@ -1,0 +1,122 @@
+- name: wevapp installer play
+  hosts: servers
+  become: true
+  tasks:
+   #- name: Upgrade all yum package
+   #  ansible.builtin.yum:
+   #   name: '*'
+   #  state: latest
+   #- name: Print message
+   #  ansible.builtin.debug:
+   #   msg: Installing Appache HTTPD
+   - name: Install apache packages 
+     yum:
+       name: httpd
+       state: present
+   - name: Check that httpd is running 
+     service:
+       name: httpd
+       state: started
+   - name: Open default HTTP port 80 for web acess
+     firewalld:
+       service: http
+       permanent: true
+       state: enabled
+   - name: Restart the firewalld service to load in the firewall changes 
+     service:
+       name: firewalld
+       state: restarted
+   - name: Download images and scripts 
+     become: yes
+     shell: |
+      echo -e "\n Checking to see if directory /home/opc/downloads exisits"
+      if [ -d "/home/opc/downloads" ]; 
+      then
+        echo -e "\n Directory /home/opc/downloads exisits, it will be deleted"
+        rm /home/opc/downloads/*.*
+        rm -r /home/opc/downloads 
+        echo -e "\n Checking /home/opc .... "
+        pwd
+        ls -ltr
+      fi
+      echo -e "\n Creating the download directory now ...." 
+      mkdir /home/opc/downloads/
+      pwd
+      ls -ltr
+      cd /home/opc/downloads/
+      echo -e "\n Current working directory is: " 
+      pwd
+      ls -ltr
+      echo -e "\n Copying file 1: oneclick.pdf"
+      wget https://objectstorage.us-sanjose-1.oraclecloud.com/p/V-57PIESHhnVE3qqKCd3e7pSn88ypOYiNEIb6p6aKJcUMtYDByITmuuy1kc2WFsS/n/ax1qybrxcvtj/b/tensor-flow-aiml-bucket/o/oneclick.pdf
+      echo -e "\n Copying file 2: oracleacademylandoaiml.jpg"
+      wget https://objectstorage.us-sanjose-1.oraclecloud.com/p/5Xtut-fy4is4w8JLK2ahYjbNzXNIbfBMxdaGlJQUgSGGy1QMsd-Qc6m9616qv43v/n/ax1qybrxcvtj/b/tensor-flow-aiml-bucket/o/oracleacademylandoaiml.jpg
+      echo -e "\n Copying file 3: poweredbyoci.jpg"
+      wget https://objectstorage.us-sanjose-1.oraclecloud.com/p/7TBt3KotqKRnsC6Y8GQ-mcvsbBxbhLwyELkEG2z2PnmXHlGsOhSA6554zh8tgrls/n/ax1qybrxcvtj/b/tensor-flow-aiml-bucket/o/poweredbyoci.jpg      
+      echo -e "\n Copying file 4: tensorflowdemo.gif"
+      wget https://objectstorage.us-sanjose-1.oraclecloud.com/p/gYKaBaGhSCmKzyKBvZon9s8rYaiK2415SaeRI8MtiIBRqD0pEg_nKrmfI16NNogF/n/ax1qybrxcvtj/b/tensor-flow-aiml-bucket/o/tensorflowdemo.gif
+      pwd
+      ls -ltr
+      echo -e "\n Copying file 4: create_website_index_html.sh"
+      wget https://objectstorage.us-sanjose-1.oraclecloud.com/p/xX6Jec52z8hzRJ7SAYE2c5Aja3dv4GlNgQWhO3POuL3PsxynxLKM595tu0K_8kow/n/ax1qybrxcvtj/b/tensor-flow-aiml-bucket/o/create_website_index_html.sh
+      pwd
+      ls -ltr
+      echo -e '====> Verify if the installer script is downloaded'
+      ls -l /home/opc/downloads/create_website_index_html.sh
+      echo -e ''
+      echo -e '====> Changing installer script execuipon mode'
+      ls -l /home/opc/downloads/create_website_index_html.sh
+      chmod +x create_website_index_html.sh
+      ls -l /home/opc/downloads/create_website_index_html.sh
+      echo -e "\n ..... INSTALLATION STEPS ..... "
+      echo -e '====> Changing directory to /var/www/html'
+      cd /var/www/html/
+      pwd
+      ls -ltr
+      echo -e '====> Checking to see if an html.index file exisits.'
+      if [ -f "/var/www/html/index.html" ];
+      then
+        echo -e '====> An index.html file exists - remove it before crteating a new one.'
+        rm -r /var/www/html/index.html
+      fi
+      echo -e '====> Executing the script to create html.index'
+      sh /home/opc/downloads/create_website_index_html.sh
+      pwd
+      ls -ltr
+      cat index.html
+      echo -e '====> Creating images and labs direvtory under /var/www/html'
+      if [ -d "/var/www/html/images" ];
+      then
+        echo -e '====> An images directory exists - remove it before crteating a new one.'
+        rm -r /var/www/html/images
+      fi
+      echo -e '====> Now creating an images direvtory under /var/www/html ....'
+      mkdir /var/www/html/images
+      pwd
+      ls -ltr
+      if [ -d "/var/www/html/labs" ];
+      then
+        echo -e '====> An labs directory exists - remove it before crteating a new one.'
+        rm -r /var/www/html/labs
+      fi
+      echo -e '====> Now creating a labs direvtory under /var/www/html ....'
+      mkdir /var/www/html/labs
+      pwd
+      ls -ltr
+      echo -e '====> Now Copying all used images files to website images directory'
+      cp /home/opc/downloads/oracleacademylandoaiml.jpg  /var/www/html/images/oracleacademylandoaiml.jpg
+      cp /home/opc/downloads/poweredbyoci.jpg /var/www/html/images/poweredbyoci.jpg
+      cp /home/opc/downloads/tensorflowdemo.gif /var/www/html/images/tensorflowdemo.gif
+      ls -ltr /var/www/html/images
+      echo -e '====> Now Copying preentation file to website labs directory'
+      cp /home/opc/downloads/oneclick.pdf /var/www/html/labs/oneclick.pdf
+      ls -ltr /var/www/html/labs
+     register: command_output 
+     tags: command_output
+   - debug: 
+      var: command_output.stdout_lines
+   - name: Making sure appache is restaring 
+     service:
+       name: httpd
+       state: restarted
+       enabled: yes
