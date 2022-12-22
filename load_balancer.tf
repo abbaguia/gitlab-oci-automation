@@ -2,7 +2,7 @@
 resource "oci_load_balancer" "this" {
   depends_on = [oci_core_instance.this]
 
-  compartment_id = oci_identity_compartment.this.id
+  compartment_id = var.compartment_ocid #oci_identity_compartment.this.id
   count          = (var.is_loadbalancer_installed) ? 1 : 0
 
   display_name               = "${var.display_name_prefix} ELB"
