@@ -2,7 +2,7 @@ provider "oci" {}
 
 
 data "oci_identity_availability_domains" "ads" {
-    compartment_id = oci_identity_compartment.this.id
+    compartment_id = var.compartment_ocid #oci_identity_compartment.this.id
 }
 
 data "oci_identity_fault_domains" "fds" {
@@ -28,7 +28,7 @@ resource "oci_core_instance" "this" {
   availability_domain = (var.availability_domain_number != 0) ? lookup(local.ads[abs(var.availability_domain_number - 1)], "name") : lookup(local.ads[count.index % floor(var.server_count)], "name")
   fault_domain = (var.fault_domain_number != 0) ? lookup(local.fds[abs(var.fault_domain_number - 1)], "name") : lookup(local.fds[count.index % floor(var.server_count)], "name")
   
-  compartment_id      = oci_identity_compartment.this.id
+  compartment_id      = var.compartment_ocid #oci_identity_compartment.this.id
   create_vnic_details {
     assign_private_dns_record = "true"
     assign_public_ip          = var.assign_public_ipaddress
