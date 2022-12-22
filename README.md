@@ -1,2 +1,2 @@
 # gitlab-oci-automation
-Migrate the GitLab on OCI - Start Guide developed by Farook Farooq Nafey for Oracle World 2022
+Preliminary Collaboration with Farook Nafey - Migration of a semi monolitic application to a microservice re-architecture
