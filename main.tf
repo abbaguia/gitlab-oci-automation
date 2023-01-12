@@ -6,7 +6,6 @@ data "oci_identity_availability_domains" "ads" {
 }
 
 data "oci_identity_fault_domains" "fds" {
-    #availability_domain = (var.availability_domain_number != 0) ? lookup(local.ads[abs(var.availability_domain_number - 1)], "name") : lookup(local.ads[count.index % floor(min(2, 3))], "name")
     availability_domain = var.availability_domain
     compartment_id = var.compartment_ocid
 }
