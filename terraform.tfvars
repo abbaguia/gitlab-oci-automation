@@ -29,6 +29,7 @@ subnet_cidr_block = "10.0.1.0/24"
 #
 # Number of Servers (Virtual Machines)
 server_count = 3
+sever_limit = 3
 #
 # Avaialability Domain and fault domain number
 availability_domain = "GqIF:US-ASHBURN-AD-1"
