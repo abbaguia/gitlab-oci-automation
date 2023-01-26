@@ -18,7 +18,9 @@ locals {
 
 resource "oci_core_instance" "this" {
 
-  count = var.server_count
+  #count = var.server_count
+  count = (var.sever_count <= var.sever_limit) ? var.sever_count : var.sever_limit
+
 
   availability_config {
     recovery_action = "RESTORE_INSTANCE"
@@ -33,7 +35,9 @@ resource "oci_core_instance" "this" {
     assign_public_ip          = var.assign_public_ipaddress
     subnet_id                 = oci_core_subnet.My-Public-Subnet.id
   }
+    
   display_name = "${var.display_name_prefix} Server${count.index + 1}"
+  
   instance_options {
     are_legacy_imds_endpoints_disabled = "false"
   }
@@ -41,6 +45,7 @@ resource "oci_core_instance" "this" {
   metadata = {
     ssh_authorized_keys = "${file(var.ssh_public_key)}"
   }
+    
   shape = var.instance_shape
   shape_config {
     baseline_ocpu_utilization = "BASELINE_1_1"
