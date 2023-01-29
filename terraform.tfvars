@@ -3,7 +3,7 @@
 
 # Tenancy and Compartment Information
 # Parent Compartement OCID 
-compartment_ocid = "ocid1.compartment.oc1..aaaaaaaabliehdjgxojzrpisiode2ujuird3zgn5edvaitsn6x4aolvntsia"
+compartment_ocid = "ocid1.compartment.oc1..aaaaaaaab....."
 compartment_name = "Global-AIML-LAB"
 compartment_description = "Global AI/ML LAB Compartment"
 compartment_delete_on_destroy = true
@@ -32,13 +32,11 @@ server_count = 3
 sever_limit = 3
 #
 # Avaialability Domain and fault domain number
-availability_domain = "GqIF:US-ASHBURN-AD-1"
 availability_domain_number = 0
-fault_domain = "FAULT-DOMAIN-1"
 fault_domain_number = 0
 #
 #
-image_ocid = "ocid1.image.oc1.iad.aaaaaaaamo6rmozpm2egwqvcswiwyl4g6uacdiergesmfb6ku4j26fmcjiwq"
+image_ocid = "ocid1.image.oc1.iad.aaaaaaaa...."
 #
 # Display Name Prefix and host/dns name prefix
 display_name_prefix = "One Click AI/ML Demo" #"Remote State Demo"
@@ -64,9 +62,9 @@ instance_memory_in_gbs = "15"
 ###########################################################
 # 
 # Flag to configure a felxible load balancer and parameters values 
-is_loadbalancer_installed = true
-lb_min_bandwith_in_mgps = 10
-lb_max_bandwith_in_mgps = 10
+is_loadbalancer_installed = false
+lb_min_bandwith_in_mgps = 100
+lb_max_bandwith_in_mgps = 100
 
 
 ###################################
@@ -74,7 +72,7 @@ lb_max_bandwith_in_mgps = 10
 ###################################
 #
 # Flag to turn on ssh access and configuraiton check
-is_testing_required = true
+is_testing_required = false
 
 
 ###################################################
@@ -82,16 +80,18 @@ is_testing_required = true
 ###################################################
 #
 # Flag to configure an appache web server and a demo website 
-is_website_installed = true
+is_website_installed = false
 
 
 ##################################################
 # STEP 6 ===> CHECK THE LB HEALTH STATE IS GREEN #
 ##################################################
 #
-# Check the web application demo website (http://public_ip_address_of_load_balacer) 
+# Check the web application demo website (http://public_ip_address_of_load_balancer) 
+# Run curl http://public_ip_address_of_load_balancer
 
 
 ################################################
 # STEP 7 ===> WHEN DONE DESTROY ALL RESSOURCES #
 ################################################
+# rerraform destroy
