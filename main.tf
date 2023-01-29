@@ -1,3 +1,5 @@
+# Version 2
+
 provider "oci" {}
 
 
@@ -18,8 +20,8 @@ locals {
 
 resource "oci_core_instance" "this" {
 
-  #count = var.server_count
-  count = (var.sever_count <= var.sever_limit) ? var.sever_count : var.sever_limit
+  #count = var.server_count     # version 1
+  count = (var.sever_count <= var.sever_limit) ? var.sever_count : var.sever_limit  # version 2
 
 
   availability_config {
@@ -49,8 +51,8 @@ resource "oci_core_instance" "this" {
   shape = var.instance_shape
   shape_config {
     baseline_ocpu_utilization = "BASELINE_1_1"
-    memory_in_gbs             = var.instance_memory_in_gbs #"8"
-    ocpus                     = var.instance_nb_of_ocpus   #"1"
+    memory_in_gbs             = var.instance_memory_in_gbs 
+    ocpus                     = var.instance_nb_of_ocpus  
   }
   source_details {
     source_id   = var.image_ocid
