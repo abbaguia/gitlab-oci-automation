@@ -28,6 +28,7 @@ resource "oci_core_instance" "this" {
     recovery_action = "RESTORE_INSTANCE"
   }
   
+  # Version 2: Availability Domain Name is dymanically generated  
   availability_domain = (var.availability_domain_number != 0) ? lookup(local.ads[abs(var.availability_domain_number - 1)], "name") : lookup(local.ads[count.index % floor(var.server_count)], "name")
   fault_domain = (var.fault_domain_number != 0) ? lookup(local.fds[abs(var.fault_domain_number - 1)], "name") : lookup(local.fds[count.index % floor(var.server_count)], "name")
   
