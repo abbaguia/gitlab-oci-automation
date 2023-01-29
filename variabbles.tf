@@ -19,7 +19,6 @@ variable "lb_max_bandwith_in_mgps" {}
 # Compute Instance Variables
 variable "availability_domain" {}
 variable "availability_domain_number" {}
-variable "fault_domain" {}
 variable "fault_domain_number" {}
 variable "server_count" {}
 variable "sever_limit" {}     # # version 2
