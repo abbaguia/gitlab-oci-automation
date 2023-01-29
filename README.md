@@ -1,13 +1,13 @@
 # tensorflow-demo-sanjose
 
-Preliminary Collaboration with Farook Nafey - Migration of a semi monolitique application to a microservice re-architecture
+Migration of a semi monolitique application to a microservice re-architecture. But first going from simple to complexe we need to migrate from a Single Availability Domain in the West Region (OCI Free Tier in San Jose) to the internal ISV Tenancy in the East Region (Ashburn). The later is a full Multi-Availabiitt-Domain with 3 Fault Domains and quasi unlimited quota (at least more than 2 VMs). 
 
-The source application is a tensor flow demo including load balancer that alow the creation of 3 instances cluster (deployed in a Free Cloud in San Jose region)
+The source application is a tensor flow demo including load balancer that alow the creation of a higer availability cluster composed of 3 or more VMs (comapred to max 2 instance servers limit of the Free tier in San Jose region)
 
-This is the entry point of an incremental multi-tenancies, multi-cloud, and multi-region cloud applications provisioning scenario that is automated using the following DevOps tools: GitHub, Hashicorp Terraform, Ansible, OCI-CLI and Linux bash shell. 
+This is the second increment in complexity to our multi-tenancies, multi-cloud, and multi-region cloud reference architectures. Here we modifying the the line of code that control the number of instance (count) using only two DevOps tools: GitHub, Hashicorp Terraform, Ansible, Linux bash shell and Cloud Shell embeded Code editor. 
 
-Behind the scene we also used our own custom tool (Click 2 Consume), build in Oracle CloudShell as well as Oracle Managed Resources (Terraform Managed Service).  
+Behind the scene we have used our own custom tool (Click 2 Consume Teraform command alias), loudShell as well as Oracle Managed Resources (Terraform Managed Service).  
 
-Jenkins is used to glue the whole together as a DevOps CI/CD pipeline. 
+Jenkins will be integrated to glue the whole together to using a DevOps CI/CD pipelines. 
 
-Last Update: 12/22/2022 
+Last Update: 01/28/2022 
