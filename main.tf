@@ -20,9 +20,9 @@ locals {
 
 resource "oci_core_instance" "this" {
 
-  #count = var.server_count     # version 1
-  count = (var.sever_count <= var.sever_limit) ? var.sever_count : var.sever_limit  # version 2
-
+  #count = var.server_count
+  #count = (var.server_count <= 2) ? var.server_count : 2
+  count = (var.server_count <= var.server_limit) ? var.server_count : var.server_limit  # version 2
 
   availability_config {
     recovery_action = "RESTORE_INSTANCE"
