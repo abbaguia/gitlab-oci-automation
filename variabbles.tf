@@ -1,6 +1,6 @@
-####################################
-#.   VARIBLES DEFINITION.         #
-####################################
+######################################
+#  VARIBLES DEFINITION.     Version2 #
+######################################
 
 # Root and Chikd Compartment 
 variable "compartment_ocid" {}
@@ -22,7 +22,7 @@ variable "availability_domain_number" {}
 variable "fault_domain" {}
 variable "fault_domain_number" {}
 variable "server_count" {}
-variable "sever_limit" {}
+variable "sever_limit" {}     # # version 2
 variable "image_ocid" {}
 variable "display_name_prefix" {}
 variable "assign_public_ipaddress" {}
