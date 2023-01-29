@@ -4,7 +4,7 @@ provider "oci" {}
 
 
 data "oci_identity_availability_domains" "ads" {
-    compartment_id = var.compartment_ocid #oci_identity_compartment.this.id
+    compartment_id = oci_identity_compartment.this.id
 }
 
 data "oci_identity_fault_domains" "fds" {
