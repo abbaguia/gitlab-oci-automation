@@ -21,7 +21,7 @@ variable "availability_domain" {}
 variable "availability_domain_number" {}
 variable "fault_domain_number" {}
 variable "server_count" {}
-variable "sever_limit" {}     # # version 2
+variable "server_limit" {}     # # version 2
 variable "image_ocid" {}
 variable "display_name_prefix" {}
 variable "assign_public_ipaddress" {}
