@@ -1,5 +1,5 @@
-######################################
-#  VARIBLES DEFINITION.     Version2 #
+#####################################
+#.   VARIBLES DEFINITION. VERSION 2  #
 ######################################
 
 # Root and Chikd Compartment 
@@ -31,6 +31,6 @@ variable "instance_shape" {}
 variable "instance_memory_in_gbs" {}
 variable "instance_nb_of_ocpus" {}
 
-# Web Application Variables
+# Web Application flag variables
 variable "is_testing_required" {}
 variable "is_website_installed" {}
