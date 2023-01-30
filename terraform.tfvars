@@ -4,8 +4,8 @@
 # Tenancy and Compartment Information
 # Parent Compartement OCID 
 compartment_ocid = "ocid1.compartment.oc1..aaaaaaaab....."
-compartment_name = "Global-AIML-LAB"
-compartment_description = "Global AI/ML LAB Compartment"
+compartment_name = "Demo2-MultiAD-IaD-Compartment"
+compartment_description = "Demo Cmpartment for Simulation of a region with 3 AD and 3FD "
 compartment_delete_on_destroy = true
 
 ###################################
@@ -28,8 +28,8 @@ subnet_cidr_block = "10.0.1.0/24"
 ###################################
 #
 # Number of Servers (Virtual Machines)
-server_count = 3
-sever_limit = 3
+server_count = 4
+sever_limit = 10
 #
 # Avaialability Domain and fault domain number
 availability_domain_number = 0
