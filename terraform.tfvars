@@ -1,11 +1,15 @@
 # This is the main configuration file to maintain
 # Update with your own data
 
-# Tenancy and Compartment Information
-# Parent Compartement OCID 
+
+###################################
+# STEP 0 ===> CREATE COMPARTMENT  #
+###################################
+
+# Tenancy Information - Parent Compartment OCID 
 compartment_ocid = "ocid1.compartment.oc1..aaaaaaaab....."
 compartment_name = "Demo2-MultiAD-IaD-Compartment"
-compartment_description = "Demo Cmpartment for Simulation of a region with 3 AD and 3FD "
+compartment_description = "Demo Compartment for test purpose only"
 compartment_delete_on_destroy = true
 
 ###################################
